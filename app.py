@@ -34,7 +34,7 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
-        if guess > secret:
+        if guess > secret: #FIXME: Logic is inverted and breaks here
             return "Too High", "📈 Go HIGHER!"
         else:
             return "Too Low", "📉 Go LOWER!"
@@ -155,7 +155,7 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
-        if st.session_state.attempts % 2 == 0:
+        if st.session_state.attempts % 2 == 0: #FIXME: This is a glitch that converts the secret to string every other attempt, making the logic break
             secret = str(st.session_state.secret)
         else:
             secret = st.session_state.secret
