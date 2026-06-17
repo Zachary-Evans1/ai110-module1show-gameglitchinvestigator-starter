@@ -1,4 +1,4 @@
-from logic_utils import check_guess, update_score
+from logic_utils import check_guess, update_score, parse_guess
 
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
@@ -34,3 +34,44 @@ def test_consecutive_guesses_with_integer_secret():
     # Second guess (even attempt) - should work correctly with integer secret
     result2 = check_guess(60, secret)
     assert result2[0] == "Too High"
+
+
+# Edge case tests for parse_guess
+def test_parse_guess_sentence_input():
+    # Test that a sentence/string input is rejected
+    ok, guess_int, err = parse_guess("hello world")
+    assert ok is False
+    assert guess_int is None
+    assert err == "That is not a number."
+
+
+def test_parse_guess_negative_number():
+    # Test that negative numbers are parsed correctly
+    ok, guess_int, err = parse_guess("-42")
+    assert ok is True
+    assert guess_int == -42
+    assert err is None
+
+
+def test_parse_guess_very_large_number():
+    # Test that very large numbers are parsed correctly
+    ok, guess_int, err = parse_guess("999999999999")
+    assert ok is True
+    assert guess_int == 999999999999
+    assert err is None
+
+
+def test_parse_guess_floating_point_number():
+    # Test that floating point numbers are converted to integers
+    ok, guess_int, err = parse_guess("42.7")
+    assert ok is True
+    assert guess_int == 42
+    assert err is None
+
+
+def test_parse_guess_empty_string():
+    # Test that empty string is rejected
+    ok, guess_int, err = parse_guess("")
+    assert ok is False
+    assert guess_int is None
+    assert err == "Enter a guess."
