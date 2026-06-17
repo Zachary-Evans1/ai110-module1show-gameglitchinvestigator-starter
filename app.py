@@ -1,5 +1,6 @@
 import random
 import streamlit as st
+from logic_utils import check_guess, update_score
 
 def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":
@@ -28,41 +29,6 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-
-def check_guess(guess, secret):
-    if guess == secret:
-        return "Win", "🎉 Correct!"
-
-    try:
-        if guess > secret: #FIXME: Logic is inverted and breaks here
-            return "Too High", "📈 Go HIGHER!"
-        else:
-            return "Too Low", "📉 Go LOWER!"
-    except TypeError:
-        g = str(guess)
-        if g == secret:
-            return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
-
-
-def update_score(current_score: int, outcome: str, attempt_number: int):
-    if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
-        if points < 10:
-            points = 10
-        return current_score + points
-
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
-
-    if outcome == "Too Low":
-        return current_score - 5
-
-    return current_score
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
@@ -107,7 +73,7 @@ if "history" not in st.session_state:
 st.subheader("Make a guess")
 
 st.info(
-    f"Guess a number between 1 and 100. "
+    f"Guess a number between {low} and {high}. " #Fix, used the actual range for the blue text box instead of a fixed 1 to 100 range.
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -133,7 +99,7 @@ with col3:
 
 if new_game:
     st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.secret = random.randint(low, high) #Fix: Changed the secret generation to use the difficuly range instead of a fixed 1-100 range.
     st.success("New game started.")
     st.rerun()
 
@@ -155,10 +121,7 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
-        if st.session_state.attempts % 2 == 0: #FIXME: This is a glitch that converts the secret to string every other attempt, making the logic break
-            secret = str(st.session_state.secret)
-        else:
-            secret = st.session_state.secret
+        secret = st.session_state.secret #Fix: removed the glitch that converted the secret to a string on even attempts
 
         outcome, message = check_guess(guess_int, secret)
 
@@ -186,6 +149,8 @@ if submit:
                     f"The secret was {st.session_state.secret}. "
                     f"Score: {st.session_state.score}"
                 )
+
+    st.rerun() #Fix: Added Rerun to refresh the app after each guess, otherwise every other guess would fail to register.
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
