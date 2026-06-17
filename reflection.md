@@ -77,7 +77,7 @@ It then responded with this: Aha! That's the smoking gun—the submit button is 
 
 Add st.rerun() at the end of the submit block to force a fresh rerun and clear the button state
 
-I then let Claude add the single line of code and tested the game, and the fix worked, every submission would now go through.
+I then let Claude add the single line of code and tested the game. The fix only partially worked: the guesses weren't being dropped anymore, but the hint and winning messages stopped showing. Since I already fixed three other bugs, I decided to leave the problem unresolved instead of continuing to modify the game code and risk introducing more issues.
 ---
 
 ## 3. Debugging and testing your fixes

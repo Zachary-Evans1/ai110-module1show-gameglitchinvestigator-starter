@@ -150,7 +150,5 @@ if submit:
                     f"Score: {st.session_state.score}"
                 )
 
-    st.rerun() #Fix: Added Rerun to refresh the app after each guess, otherwise every other guess would fail to register.
-
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
