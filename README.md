@@ -33,7 +33,7 @@ The game's purpose is to provide a secret number guessing game with three diffic
 
 The first bug I found is that the game would tell you to go the wrong direction when you made a wrong guess.
 
-The second bug I found was that every even guess would be converted from an interger to a string.
+The second bug I found was that every even guess would be converted from an interger to a string, causing the guess not to be parsed correctly.
 
 The third bug I found was that if an even guess was too high, it would give the user 5 points instead of taking 5 points away.
 
@@ -56,7 +56,15 @@ Describe your fixed game in numbered steps so a reader can follow along without 
 5. Game updates score after every guess.
 6. If the user gets the correct guess and the "🎉 Correct!" message shows, the game ends.
 
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+**Screenshot** *(optional)*:
+
+### Screenshot 1
+
+![Developer Debug Info](Proof1.jpg)
+
+### Screenshot 2
+
+![Winning Game](Proof2.jpg)
 
 ## 🧪 Test Results
 

@@ -27,9 +27,9 @@ Document at least 3 bugs you found. Add rows as needed.
 
 | Input |Expected Behavior | Actual Behavior | Console Output / Error |
 |-------|-------------------|-----------------|------------------------|
-|Easy   |  1 <= secret <=20    Secret = 78      None
-| 99    |  Go Lower            Nothing           None
-| 50     |  Score = -5          Score = 5         None
+|Easy   |  1 <= secret <=20 |  Secret = 78    | None                   |
+| 99    |  Go Lower         | Nothing         | None                   |
+| 50     |  Score = -5      |   Score = 5     | None                   |
 
 ---
 
@@ -101,9 +101,9 @@ Yes, Claude code helped generate a pytest test for the update_score function aft
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
-A streamlit rerun means that the entire code script is run from top to bottom every time the user interacts with the app, such as clicking a button. Instead of only updating a single part of a page after a user interaction, streamlit refreshes everything and builds the app UI from scratch everytime. This causes varibles not to stick around between interaction unless stored.
+A streamlit rerun means that the entire code script is run from top to bottom every time the user interacts with the app, such as clicking a button. Instead of only updating a single part of a page after a user interaction, streamlit refreshes everything and builds the app UI from scratch every time. This causes varibles not to stick around between interaction unless stored.
 
-Session state is how you store those varibles. It saves the values of the varibles even through the constant reruns of the script. For example, un this project the score, guess, secret and attempts are all stored in the session state. If this project didn't use session state the game would completely reset after each user interaction.
+Session state is how you store those varibles. It saves the values of the varibles even through the constant reruns of the script. For example, in this project the score, guess, secret and attempts are all stored in the session state. If this project didn't use session state the game would completely reset after each user interaction.
 
 ---
 
