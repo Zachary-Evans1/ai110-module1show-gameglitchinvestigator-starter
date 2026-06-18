@@ -101,11 +101,23 @@ Yes, Claude code helped generate a pytest test for the update_score function aft
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
+A streamlit rerun means that the entire code script is run from top to bottom every time the user interacts with the app, such as clicking a button. Instead of only updating a single part of a page after a user interaction, streamlit refreshes everything and builds the app UI from scratch everytime. This causes varibles not to stick around between interaction unless stored.
+
+Session state is how you store those varibles. It saves the values of the varibles even through the constant reruns of the script. For example, un this project the score, guess, secret and attempts are all stored in the session state. If this project didn't use session state the game would completely reset after each user interaction.
+
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+  I think I need to be more clear with my prompts, I had to explain extra things a few times with the bot to make things work correctly. Also, I need to commit more, I made around 4 commits for this project, when I should have made one after every fix.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+
+Be clearer with prompts and better understand what code the AI is suggesting, I accepted a line of code this project not completely knowing what it did, it fixed the bug I wanted to fix, but it broke the hints system, so I deleted it. If I knew exactly how st.rerun() worked before hand, I could've better critiqued the AI's suggested code.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+This project showed me the power of using AI coding agents, they can speed up programming a lot by making boring code writing fast. At the same time, I learned that using AI to generate code can be frustrating, as it will not always give you exactly what you envisioned. I think I've become both more accepting of AI code, but also more cautious of it.
